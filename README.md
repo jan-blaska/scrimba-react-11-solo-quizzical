@@ -1,0 +1,1 @@
+# Quizzical - Scrimba solo project
