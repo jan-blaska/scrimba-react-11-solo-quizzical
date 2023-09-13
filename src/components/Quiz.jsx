@@ -5,6 +5,9 @@ import Question from "./Question"
 
 export default function Quiz() {
     const [quizArray, setQuizArray] = useState([])
+    const [correctAnswers, setCorrectAnswers] = useState(0)
+    const [formSubmit, setFormSubmit] = useState(false)
+    const [round, setRound] = useState(1)
     
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
@@ -27,7 +30,9 @@ export default function Quiz() {
                     })
                     setQuizArray(dataArray)
                 })
-    }, [])
+    }, [round])
+
+    console.log(round)
     
     // Fisher-Yates (also known as Knuth) shuffle algorithm
     function shuffleArray(array) {
@@ -67,15 +72,44 @@ export default function Quiz() {
         ))
     }
     
-    console.log(quizArray)
+    function handleSubmit(event) {
+        event.preventDefault()
+        quizArray.forEach(quiz => {
+            if (quiz.correctAnswer === quiz.selectedAnswer) {
+                setCorrectAnswers(prev => prev + 1)
+            }
+        })
+        setFormSubmit(true)
+    }
+
+    function newGame() {
+        setCorrectAnswers(0)
+        setFormSubmit(false)
+        setRound(prev => prev + 1)
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit} > 
                 {quizArrayElements}
-                <button className='check-answers-btn'>Check answers</button>
+                { formSubmit === false &&
+                <div className='form-btn-container'>
+                    <button className='check-answers-btn'>Check answers</button>
+                </div>
+                }
             </form>
-            
+            {
+            formSubmit && 
+                <div className='form-btn-container'>
+                    <p className='result-paragraph'>You scored {correctAnswers}/{quizArray.length} correct answers</p> 
+                    <button 
+                        className='play-again-btn'
+                        onClick={newGame}
+                    >
+                        Play again
+                    </button>
+                </div>
+            }
         </div>
     )
 }
