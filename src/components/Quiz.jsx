@@ -31,8 +31,6 @@ export default function Quiz() {
                     setQuizArray(dataArray)
                 })
     }, [round])
-
-    console.log(round)
     
     // Fisher-Yates (also known as Knuth) shuffle algorithm
     function shuffleArray(array) {
@@ -45,13 +43,15 @@ export default function Quiz() {
 
     const quizArrayElements = quizArray.map((quiz) => {        
         return (
-            <Question 
+            <Question
                 key={quiz.id}
                 id={quiz.id}
                 question={quiz.question}
+                correctAnswer={quiz.correctAnswer}
                 allAnswers={quiz.allAnswers}
                 selectedAnswer={quiz.selectedAnswer}
                 handleChange={handleChange}
+                formSubmit={formSubmit}
             />
         )
     })
