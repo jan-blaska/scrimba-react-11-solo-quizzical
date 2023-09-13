@@ -54,8 +54,7 @@ export default function Quiz() {
     function handleChange(event) {
         const {name, value} = event.target
 
-        setQuizArray(prevData => prevData.map((quiz) => {
-            
+        setQuizArray(prevData => prevData.map((quiz) => {    
             return quiz.id === name 
                 ? 
                     {
@@ -64,17 +63,17 @@ export default function Quiz() {
                     } 
                 : 
                     quiz
-
-        }))
-        console.log(quizArray)
+            }
+        ))
     }
     
+    console.log(quizArray)
 
     return (
         <div>
-            <form action="">
+            <form>
                 {quizArrayElements}
-                <button>Check answers</button>
+                <button className='check-answers-btn'>Check answers</button>
             </form>
             
         </div>

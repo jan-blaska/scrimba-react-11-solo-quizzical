@@ -30,6 +30,24 @@ main {
     padding: 20px;
 }
 
+button {
+    background-color: #4D5B9E;
+    color: #F5F7FB;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+/* WELCOME PAGE */
 .welcome-page {
     display: flex;
     justify-content: center;
@@ -47,21 +65,54 @@ main {
 }
 
 .start-quiz-btn {
-    background-color: #4D5B9E;
-    color: #F5F7FB;
-    font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     padding: 15px 50px;
-    border: none;
     border-radius: 15px;
+}
+
+/* QUIZ PAGE */
+.question {
+    border-bottom: 1px solid #DBDEF0;
+}
+
+.question-header {
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.question-answers-container {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.radio-button-label {
+    display: inline-block;
+    font-size: 0.64rem; /* 10.24px */
     font-weight: bold;
+    padding: 5px 20px;
+    border: 1px solid #293264;
+    border-radius: 10px;
+    background-color: #F5F7FB;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+  
+.radio-button-input {
+    display: none; /* Hide the actual radio input */
+}
+  
+.radio-button-input:checked + .radio-button-label {
+    background-color: #D6DBF5;
+    border: 1px solid #D6DBF5;
 }
 
-.start-quiz-btn:focus {
-    outline: none;
-}
-
-.start-quiz-btn:active {
-    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+.check-answers-btn {
+    font-size: 0.75rem;
+    padding: 10px 30px;
+    border-radius: 15px;
+    display: block;
+    margin: 25px auto 0; 
 }
