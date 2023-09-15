@@ -1,8 +1,28 @@
 import { useState } from 'react'
 import Quiz from "./components/Quiz"
+import WelcomePage from './components/WelcomePage'
 
 function App() {
+	
 	const [quizPage, setQuizPage] = useState(false)
+	const [formQuizData, setFormQuizData] = useState(
+        {
+            numberOfQuestions: "", 
+            category: "", 
+            difficulty: ""
+        }
+    )
+
+	function handleChangeQuizData(event) {
+        console.log(event)
+        const {name, value} = event.target
+        setFormQuizData(prevQuizData => {
+            return {
+                ...prevQuizData,
+                [name]: value
+            }
+        })
+    }
 
 	function togglePage() {
 		setQuizPage(() => true)
@@ -14,18 +34,18 @@ function App() {
 			{
 				quizPage
 				?
-				<Quiz />
+				<Quiz 
+					numberOfQuestions={formQuizData.numberOfQuestions}
+					category={formQuizData.category} 
+					difficulty={formQuizData.difficulty}
+				/>
 				:
-				<div className='welcome-page'>
-					<h1>Quizzical</h1>
-					<p>Test your knowledge</p>
-					<button 
-						className='start-quiz-btn'
-						onClick={() => togglePage()}
-					>
-						Start quiz
-					</button>
-				</div>
+				<WelcomePage
+					togglePage={() => togglePage()}
+					handleChangeQuizData={handleChangeQuizData}
+					formQuizData={formQuizData}
+
+				/>
 			}
 		</main>
 	)

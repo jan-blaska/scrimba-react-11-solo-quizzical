@@ -3,14 +3,14 @@ import he from "he"
 import { nanoid } from 'nanoid'
 import Question from "./Question"
 
-export default function Quiz() {
+export default function Quiz(props) {
     const [quizArray, setQuizArray] = useState([])
     const [correctAnswers, setCorrectAnswers] = useState(0)
     const [formSubmit, setFormSubmit] = useState(false)
     const [round, setRound] = useState(1)
-    
+
     useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
+        fetch(`https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple`)
             .then(res => res.json())
             .then(data => {
                     const dataArray = data.results.map((item) => {
